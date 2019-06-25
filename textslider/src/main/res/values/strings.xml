@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">textslider</string>
+    <string name="label">Label</string>
+    <string name="spacer">1</string>
+</resources>

@@ -21,8 +21,6 @@ class TextSlider @JvmOverloads constructor(
     private var attrMin: Int = 0
     private var attrMax: Int = 200
 
-    private var isSliderMoving = false
-
     init {
         init(attrs)
     }
@@ -45,24 +43,22 @@ class TextSlider @JvmOverloads constructor(
             nsSlide.min = attrMin
         }
         nsSlide.max = attrMax
-        nsText.filters = arrayOf(InputFilterRange(IntRange(attrMin, attrMax)))
+        nsText.filters = arrayOf(InputFilterRange(IntRange(0, attrMax)))
         textSliderAttrs.recycle()
     }
 
     private fun linkSlider() {
         nsSlide.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (isSliderMoving) {
+                if (fromUser) {
                     nsText.setText(String.format("%d", progress))
                 }
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                isSliderMoving = true
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                isSliderMoving = false
             }
         })
     }
@@ -76,12 +72,10 @@ class TextSlider @JvmOverloads constructor(
             }
 
             override fun afterTextChanged(editable: Editable?) {
-                if (!isSliderMoving) {
-                    try {
-                        val intValue = Integer.parseInt(editable.toString())
-                        nsSlide.progress = intValue
-                    } catch (ex: NumberFormatException) {
-                    }
+                try {
+                    val intValue = Integer.parseInt(editable.toString())
+                    nsSlide.progress = intValue
+                } catch (ex: NumberFormatException) {
                 }
             }
         })

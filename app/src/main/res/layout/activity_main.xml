@@ -12,10 +12,21 @@
             android:id="@+id/testSlider"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            app:lbl="Test Label"
+            app:lbl="Up to 555"
             app:max="555"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-    />
+            />
+
+    <com.panopset.droid.textslider.TextSlider
+            android:id="@+id/testSlider2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:lbl="100-200"
+            app:min="100"
+            app:max="200"
+            app:layout_constraintTop_toBottomOf="@id/testSlider"
+            app:layout_constraintStart_toStartOf="parent"
+            />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
